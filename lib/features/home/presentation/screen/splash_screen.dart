@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typogaphy.dart';
+import '../cubit/home_config_cubit.dart';
+import '../cubit/home_config_state.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -40,16 +43,25 @@ class _SplashScreenState extends State<SplashScreen>
     );
 
     _controller.forward();
-    _checkAuthAndNavigate();
+    _checkConfigHomeNavigation();
   }
 
-  Future<void> _checkAuthAndNavigate() async {
+  Future<void> _checkConfigHomeNavigation() async {
     await Future<void>.delayed(const Duration(seconds: 2));
     if (!mounted) {
       return;
     }
 
-    // TODO(JOAO): Criar logica verificar a busca nos endpoint
+    final HomeConfigCubit homeConfigCubit = GetIt.instance<HomeConfigCubit>();
+
+    if (homeConfigCubit.state is HomeConfigSuccess) {
+      context.go('/movies');
+    } else if (homeConfigCubit.state is HomeConfigError) {
+      // TODO(JOAO): criar essa tela de erro
+      context.go('/error');
+    } else {
+      context.go('/movies');
+    }
   }
 
   @override
