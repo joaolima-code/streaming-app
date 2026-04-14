@@ -1,7 +1,9 @@
+import 'package:equatable/equatable.dart';
+
 import '../../../home/domain/entity/home_category_entity.dart';
 import '../../data/model/movie_detail_response_model.dart';
 
-class MovieDetailEntity {
+class MovieDetailEntity extends Equatable {
   MovieDetailEntity({
     required this.id,
     required this.title,
@@ -41,5 +43,19 @@ class MovieDetailEntity {
   int? runtime;
   String? tagline;
 
-  // String get fullPathCardImage =>
+  @override
+  List<Object?> get props => <Object?>[
+    id,
+    title,
+    description,
+    originalTitle,
+    bannerImagePath,
+    cardImagePath,
+    voteAverage,
+    voteCount,
+    releaseDate,
+    categories,
+    runtime,
+    tagline,
+  ];
 }
