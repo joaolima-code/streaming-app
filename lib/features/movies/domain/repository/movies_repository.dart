@@ -5,12 +5,10 @@ import '../entity/movies_list_filter.dart';
 
 abstract class MoviesRepository {
   Future<CoreBaseResponse<MoviesListEntity>> getMoviesNowPlaying(
-    MoviesListFilter filter,
-  );
+      MoviesListFilter filter);
 
   Future<CoreBaseResponse<MoviesListEntity>> getMoviesPopular(
-    MoviesListFilter filter,
-  );
+      MoviesListFilter filter);
 
   Future<CoreBaseResponse<MovieDetailEntity>> getMovieDetails(int movieId);
 }

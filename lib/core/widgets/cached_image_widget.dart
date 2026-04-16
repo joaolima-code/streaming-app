@@ -31,8 +31,7 @@ class CachedImageWidget extends StatelessWidget {
           color: Colors.grey[850],
           borderRadius: BorderRadius.circular(borderRadius),
         ),
-        child:
-            errorWidget?.call(context) ??
+        child: errorWidget?.call(context) ??
             const Center(
               child: Icon(Icons.image_not_supported, color: Colors.grey),
             ),
@@ -42,27 +41,23 @@ class CachedImageWidget extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
       child: CachedNetworkImage(
-        imageUrl: imageUrl!,
-        width: width,
-        height: height,
-        fit: fit,
-        placeholder: (BuildContext context, String url) =>
-            placeholder?.call(context) ??
-            Container(
-              color: Colors.grey[850],
-              child: const Center(
-                child: CircularProgressIndicator(strokeWidth: 2),
-              ),
-            ),
-        errorWidget: (BuildContext context, String url, Object error) =>
-            errorWidget?.call(context) ??
-            Container(
-              color: Colors.grey[850],
-              child: const Center(
-                child: Icon(Icons.error_outline, color: Colors.grey),
-              ),
-            ),
-      ),
+          imageUrl: imageUrl!,
+          width: width,
+          height: height,
+          fit: fit,
+          placeholder: (BuildContext context, String url) =>
+              placeholder?.call(context) ??
+              Container(
+                  color: Colors.grey[850],
+                  child: const Center(
+                      child: CircularProgressIndicator(strokeWidth: 2))),
+          errorWidget: (BuildContext context, String url, Object error) =>
+              errorWidget?.call(context) ??
+              Container(
+                color: Colors.grey[850],
+                child: const Center(
+                    child: Icon(Icons.error_outline, color: Colors.grey)),
+              )),
     );
   }
 }

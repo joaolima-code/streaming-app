@@ -25,26 +25,19 @@ class MoviesInjection implements InjectionModule {
     injector.registerLazySingleton(() => MoviesRemoteDatasource(injector()));
 
     injector.registerLazySingleton<MoviesRepository>(
-      () => MoviesRepositoryImpl(injector()),
-    );
+        () => MoviesRepositoryImpl(injector()));
 
     injector.registerLazySingleton(
-      () => GetMovieDetailUsecase(
-        injector(),
-        homeConfigCubit: injector<HomeConfigCubit>(),
-      ),
+      () => GetMovieDetailUsecase(injector(),
+          homeConfigCubit: injector<HomeConfigCubit>()),
     );
     injector.registerLazySingleton(() {
-      return GetMoviesNowPlayingUsecase(
-        injector(),
-        homeConfigCubit: injector<HomeConfigCubit>(),
-      );
+      return GetMoviesNowPlayingUsecase(injector(),
+          homeConfigCubit: injector<HomeConfigCubit>());
     });
     injector.registerLazySingleton(() {
-      return GetMoviesPopularUsecase(
-        injector(),
-        homeConfigCubit: injector<HomeConfigCubit>(),
-      );
+      return GetMoviesPopularUsecase(injector(),
+          homeConfigCubit: injector<HomeConfigCubit>());
     });
 
     injector.registerLazySingleton(() => MovieDetailCubit(injector()));

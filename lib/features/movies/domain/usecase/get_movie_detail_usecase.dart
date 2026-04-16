@@ -18,8 +18,8 @@ class GetMovieDetailUsecase
     final HomeConfigImageEntity? imageConfig = homeConfigCubit.imageConfig;
 
     try {
-      final CoreBaseResponse<MovieDetailEntity> response = await _repository
-          .getMovieDetails(params);
+      final CoreBaseResponse<MovieDetailEntity> response =
+          await _repository.getMovieDetails(params);
 
       if (response.isError || response.data == null) {
         return response;
@@ -30,9 +30,7 @@ class GetMovieDetailUsecase
       if (imageConfig != null) {
         final MovieDetailEntity enrichedMovie =
             MovieConfigHelper.configDetailMovieEntity(
-              movie: resultMovie,
-              imageConfig: imageConfig,
-            );
+                movie: resultMovie, imageConfig: imageConfig);
 
         return CoreBaseResponse<MovieDetailEntity>(data: enrichedMovie);
       }

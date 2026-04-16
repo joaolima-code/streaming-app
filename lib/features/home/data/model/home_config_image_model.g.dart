@@ -7,13 +7,13 @@ part of 'home_config_image_model.dart';
 // **************************************************************************
 
 HomeConfigImageModel _$HomeConfigImageModelFromJson(
-  Map<String, dynamic> json,
-) => HomeConfigImageModel(
-  images: HomeImagesModel.fromJson(json['images'] as Map<String, dynamic>),
-  changeKeys: (json['changeKeys'] as List<dynamic>?)
-      ?.map((e) => e as String)
-      .toList(),
-);
+        Map<String, dynamic> json) =>
+    HomeConfigImageModel(
+      images: HomeImagesModel.fromJson(json['images'] as Map<String, dynamic>),
+      changeKeys: (json['changeKeys'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+    );
 
 HomeImagesModel _$HomeImagesModelFromJson(Map<String, dynamic> json) =>
     HomeImagesModel(

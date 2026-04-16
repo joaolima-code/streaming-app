@@ -24,64 +24,42 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Stack(
+        onTap: onTap,
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              CachedImageWidget(
-                imageUrl: imageUrl,
-                width: width,
-                height: height,
-              ),
-              Positioned(
-                top: 8,
-                right: 8,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.ratingStar,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      const Icon(
-                        Icons.star_rounded,
-                        size: 14,
-                        color: Colors.black,
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        rating?.toStringAsFixed(1) ?? 'N/A',
-                        style: AppTypography.labelLarge.copyWith(
-                          color: Colors.black,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          SizedBox(
-            width: width,
-            child: Text(
-              title,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: AppTypography.bodyMedium,
-            ),
-          ),
-        ],
-      ),
-    );
+              Stack(children: <Widget>[
+                CachedImageWidget(
+                    imageUrl: imageUrl, width: width, height: height),
+                Positioned(
+                    top: 8,
+                    right: 8,
+                    child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                            color: AppColors.ratingStar,
+                            borderRadius: BorderRadius.circular(6)),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            const Icon(Icons.star_rounded,
+                                size: 14, color: Colors.black),
+                            const SizedBox(width: 4),
+                            Text(rating?.toStringAsFixed(1) ?? 'N/A',
+                                style: AppTypography.labelLarge.copyWith(
+                                    color: Colors.black, fontSize: 12)),
+                          ],
+                        ))),
+              ]),
+              const SizedBox(height: 8),
+              SizedBox(
+                  width: width,
+                  child: Text(title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTypography.bodyMedium))
+            ]));
   }
 }

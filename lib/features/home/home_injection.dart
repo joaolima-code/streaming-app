@@ -28,23 +28,15 @@ class HomeInjection implements InjectionModule {
     );
 
     injector.registerLazySingleton(() => GetConfigImagesUsecase(injector()));
-    injector.registerLazySingleton(
-      () => GetListMovieCategoryUsecase(injector()),
-    );
+    injector
+        .registerLazySingleton(() => GetListMovieCategoryUsecase(injector()));
 
-    injector.registerSingleton<HomeConfigCubit>(
-      HomeConfigCubit(
+    injector.registerSingleton<HomeConfigCubit>(HomeConfigCubit(
         getConfigImagesUsecase: injector(),
-        getListMovieCategoryUsecase: injector(),
-      ),
-    );
+        getListMovieCategoryUsecase: injector()));
     injector.registerLazySingleton(() => NowPlayingCarouselCubit(injector()));
     injector.registerLazySingleton(() => PopularCarouselCubit(injector()));
-    injector.registerLazySingleton(
-      () => HomeCentralCubit(
-        nowPlayingCarouselCubit: injector(),
-        popularCarouselCubit: injector(),
-      ),
-    );
+    injector.registerLazySingleton(() => HomeCentralCubit(
+        nowPlayingCarouselCubit: injector(), popularCarouselCubit: injector()));
   }
 }

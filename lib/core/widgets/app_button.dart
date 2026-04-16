@@ -40,14 +40,12 @@ class AppButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor,
-          foregroundColor: foregroundColor,
-          padding: padding,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          elevation: variant == AppButtonVariant.primary ? 8 : 0,
-        ),
+            backgroundColor: backgroundColor,
+            foregroundColor: foregroundColor,
+            padding: padding,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            elevation: variant == AppButtonVariant.primary ? 8 : 0),
         child: isLoading
             ? SizedBox(
                 height: 20,
@@ -55,8 +53,7 @@ class AppButton extends StatelessWidget {
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
                   valueColor: AlwaysStoppedAnimation<Color>(foregroundColor),
-                ),
-              )
+                ))
             : _buildButtonContent(fontSize),
       ),
     );
@@ -65,14 +62,13 @@ class AppButton extends StatelessWidget {
   Widget _buildButtonContent(double fontSize) {
     if (icon != null) {
       return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Icon(icon, size: fontSize + 4),
-          const SizedBox(width: 8),
-          Text(label),
-        ],
-      );
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Icon(icon, size: fontSize + 4),
+            const SizedBox(width: 8),
+            Text(label)
+          ]);
     }
     return Text(label);
   }

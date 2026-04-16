@@ -24,8 +24,8 @@ class GetMoviesNowPlayingUsecase
     final List<HomeCategoryEntity> categories = homeConfigCubit.categories;
 
     try {
-      final CoreBaseResponse<MoviesListEntity> response = await _repository
-          .getMoviesNowPlaying(filter);
+      final CoreBaseResponse<MoviesListEntity> response =
+          await _repository.getMoviesNowPlaying(filter);
 
       if (response.isError || response.data == null) {
         return response;
@@ -36,40 +36,32 @@ class GetMoviesNowPlayingUsecase
       if (imageConfig != null && moviesList.results.isNotEmpty) {
         final List<MovieEntity> enrichedMovies =
             MovieConfigHelper.addConfigEntities(
-              movies: moviesList.results,
-              imageConfig: imageConfig!,
-              categories: categories,
-            );
+                movies: moviesList.results,
+                imageConfig: imageConfig,
+                categories: categories);
 
         return CoreBaseResponse<MoviesListEntity>(
-          data: MoviesListEntity(
-            page: moviesList.page,
-            results: enrichedMovies,
-            totalPages: moviesList.totalPages,
-          ),
-        );
+            data: MoviesListEntity(
+                page: moviesList.page,
+                results: enrichedMovies,
+                totalPages: moviesList.totalPages));
       } else if (categories.isNotEmpty) {
         final List<MovieEntity> enrichedMovies = moviesList.results.map((
           MovieEntity movie,
         ) {
           if (movie.genreIds.isNotEmpty) {
             return movie.copyWith(
-              categories: MovieConfigHelper.mapGenreIdsToCategories(
-                genreIds: movie.genreIds,
-                categories: categories,
-              ),
-            );
+                categories: MovieConfigHelper.mapGenreIdsToCategories(
+                    genreIds: movie.genreIds, categories: categories));
           }
           return movie;
         }).toList();
 
         return CoreBaseResponse<MoviesListEntity>(
-          data: MoviesListEntity(
-            page: moviesList.page,
-            results: enrichedMovies,
-            totalPages: moviesList.totalPages,
-          ),
-        );
+            data: MoviesListEntity(
+                page: moviesList.page,
+                results: enrichedMovies,
+                totalPages: moviesList.totalPages));
       }
 
       return CoreBaseResponse<MoviesListEntity>(data: moviesList);

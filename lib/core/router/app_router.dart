@@ -13,30 +13,27 @@ class AppRouter {
     debugLogDiagnostics: true,
     routes: <RouteBase>[
       GoRoute(
-        path: '/',
-        builder: (BuildContext context, GoRouterState state) {
-          return const SplashScreen();
-        },
-      ),
+          path: '/',
+          builder: (BuildContext context, GoRouterState state) {
+            return const SplashScreen();
+          }),
       GoRoute(
-        path: '/movies',
-        builder: (BuildContext context, GoRouterState state) {
-          return const HomeScreen();
-        },
-      ),
+          path: '/movies',
+          builder: (BuildContext context, GoRouterState state) {
+            return const HomeScreen();
+          }),
       GoRoute(
-        path: '/movie/:id',
-        builder: (BuildContext context, GoRouterState state) {
-          final String? id = state.pathParameters['id'];
-          return MovieDetailScreen(movieId: id);
-        },
-      ),
+          path: '/movie/:id',
+          builder: (BuildContext context, GoRouterState state) {
+            final String? id = state.pathParameters['id'];
+            return MovieDetailScreen(movieId: id);
+          }),
       GoRoute(
-        path: '/error',
-        builder: (BuildContext context, GoRouterState state) {
-          return const Scaffold(body: Center(child: Text('An error occurred')));
-        },
-      ),
+          path: '/error',
+          builder: (BuildContext context, GoRouterState state) {
+            return const Scaffold(
+                body: Center(child: Text('An error occurred')));
+          })
     ],
   );
 }
