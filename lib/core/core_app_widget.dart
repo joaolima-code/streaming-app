@@ -16,7 +16,7 @@ class CoreAppWidget extends StatelessWidget {
         final HomeConfigCubit homeConfigCubit =
             GetIt.instance<HomeConfigCubit>();
 
-        homeConfigCubit.init();
+        // homeConfigCubit.init();
         return homeConfigCubit;
       },
       child: MaterialApp.router(

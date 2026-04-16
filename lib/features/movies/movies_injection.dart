@@ -8,6 +8,7 @@ import 'domain/repository/movies_repository.dart';
 import 'domain/usecase/get_movie_detail_usecase.dart';
 import 'domain/usecase/get_movies_now_playing_usecase.dart';
 import 'domain/usecase/get_movies_popular_usecase.dart';
+import 'presentation/cubits/movie_detail_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -24,27 +25,21 @@ class MoviesInjection implements InjectionModule {
     injector.registerLazySingleton(() => MoviesRemoteDatasource(injector()));
 
     injector.registerLazySingleton<MoviesRepository>(
-      () => MoviesRepositoryImpl(injector()),
+        () => MoviesRepositoryImpl(injector()));
+
+    injector.registerLazySingleton(
+      () => GetMovieDetailUsecase(injector(),
+          homeConfigCubit: injector<HomeConfigCubit>()),
     );
-
-    injector.registerLazySingleton(() => GetMovieDetailUsecase(injector()));
-
     injector.registerLazySingleton(() {
-      final HomeConfigCubit homeConfigCubit = injector<HomeConfigCubit>();
-      return GetMoviesNowPlayingUsecase(
-        injector(),
-        imageConfig: homeConfigCubit.imageConfig,
-        categories: homeConfigCubit.categories,
-      );
+      return GetMoviesNowPlayingUsecase(injector(),
+          homeConfigCubit: injector<HomeConfigCubit>());
+    });
+    injector.registerLazySingleton(() {
+      return GetMoviesPopularUsecase(injector(),
+          homeConfigCubit: injector<HomeConfigCubit>());
     });
 
-    injector.registerLazySingleton(() {
-      final HomeConfigCubit homeConfigCubit = injector<HomeConfigCubit>();
-      return GetMoviesPopularUsecase(
-        injector(),
-        imageConfig: homeConfigCubit.imageConfig,
-        categories: homeConfigCubit.categories,
-      );
-    });
+    injector.registerLazySingleton(() => MovieDetailCubit(injector()));
   }
 }

@@ -12,15 +12,13 @@ MoviesListModel _$MoviesListModelFromJson(Map<String, dynamic> json) =>
           ? null
           : Dates.fromJson(json['dates'] as Map<String, dynamic>),
       page: (json['page'] as num?)?.toInt(),
-      results:
-          (json['results'] as List<dynamic>?)
+      results: (json['results'] as List<dynamic>?)
               ?.map(
-                (e) => MovieResponseModel.fromJson(e as Map<String, dynamic>),
-              )
+                  (e) => MovieResponseModel.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <MovieResponseModel>[],
-      totalPages: (json['totalPages'] as num?)?.toInt(),
-      totalResults: (json['totalResults'] as num?)?.toInt(),
+      totalPages: (json['total_pages'] as num?)?.toInt(),
+      totalResults: (json['total_results'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$MoviesListModelToJson(MoviesListModel instance) =>
@@ -28,16 +26,16 @@ Map<String, dynamic> _$MoviesListModelToJson(MoviesListModel instance) =>
       'dates': instance.dates,
       'page': instance.page,
       'results': instance.results,
-      'totalPages': instance.totalPages,
-      'totalResults': instance.totalResults,
+      'total_pages': instance.totalPages,
+      'total_results': instance.totalResults,
     };
 
 Dates _$DatesFromJson(Map<String, dynamic> json) => Dates(
-  maximum: json['maximum'] as String?,
-  minimum: json['minimum'] as String?,
-);
+      maximum: json['maximum'] as String?,
+      minimum: json['minimum'] as String?,
+    );
 
 Map<String, dynamic> _$DatesToJson(Dates instance) => <String, dynamic>{
-  'maximum': instance.maximum,
-  'minimum': instance.minimum,
-};
+      'maximum': instance.maximum,
+      'minimum': instance.minimum,
+    };

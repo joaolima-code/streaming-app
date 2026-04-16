@@ -1,19 +1,20 @@
 import '../../features/home/domain/entity/home_category_entity.dart';
 import '../../features/home/domain/entity/home_config_image_entity.dart';
 import '../../features/movies/data/model/movie_response_model.dart';
+import '../../features/movies/domain/entity/movie_detail_entity.dart';
 import '../../features/movies/domain/entity/movie_entity.dart';
 
 class MovieConfigHelper {
   MovieConfigHelper._();
 
   static List<MovieEntity> addConfigEntities({
-    required List<MovieResponseModel> movies,
+    required List<MovieEntity> movies,
     required HomeConfigImageEntity imageConfig,
     required List<HomeCategoryEntity> categories,
     String posterSize = 'w500',
     String backdropSize = 'w780',
   }) {
-    return movies.map((MovieResponseModel movie) {
+    return movies.map((MovieEntity movie) {
       return configMovieEntity(
         movie: movie,
         imageConfig: imageConfig,
@@ -25,49 +26,64 @@ class MovieConfigHelper {
   }
 
   static MovieEntity configMovieEntity({
-    required MovieResponseModel movie,
+    required MovieEntity movie,
     required HomeConfigImageEntity imageConfig,
     required List<HomeCategoryEntity> categories,
     String posterSize = 'w500',
     String backdropSize = 'w780',
   }) {
-    final MovieEntity movieEntity = MovieEntity.fromModel(movie);
-
     final String? cardImagePath = _buildImageUrl(
-      basePath: movie.posterPath,
+      basePath: movie.cardImagePath,
       baseUrl: imageConfig.secureBaseUrl ?? imageConfig.baseUrl,
       size: posterSize,
     );
 
     final String? bannerImagePath = _buildImageUrl(
-      basePath: movie.backdropPath,
+      basePath: movie.bannerImagePath,
       baseUrl: imageConfig.secureBaseUrl ?? imageConfig.baseUrl,
       size: backdropSize,
     );
 
     final List<HomeCategoryEntity> mappedCategories = mapGenreIdsToCategories(
-      genreIds: movie.genreIds ?? <int>[],
+      genreIds: movie.genreIds,
       categories: categories,
     );
 
-    return MovieEntity(
-      id: movieEntity.id,
+    return movie.copyWith(
       cardImagePath: cardImagePath,
       bannerImagePath: bannerImagePath,
-      title: movieEntity.title,
-      description: movieEntity.description,
-      genreIds: movieEntity.genreIds,
       categories: mappedCategories,
-      popularity: movieEntity.popularity,
-      releaseDate: movieEntity.releaseDate,
-      voteAverage: movieEntity.voteAverage,
-      voteCount: movieEntity.voteCount,
+    );
+  }
+
+  static MovieDetailEntity configDetailMovieEntity({
+    required MovieDetailEntity movie,
+    required HomeConfigImageEntity imageConfig,
+    String posterSize = 'w500',
+    String backdropSize = 'w780',
+  }) {
+    final String? cardImagePath = _buildImageUrl(
+      basePath: movie.cardImagePath,
+      baseUrl: imageConfig.secureBaseUrl ?? imageConfig.baseUrl,
+      size: posterSize,
+    );
+
+    final String? bannerImagePath = _buildImageUrl(
+      basePath: movie.bannerImagePath,
+      baseUrl: imageConfig.secureBaseUrl ?? imageConfig.baseUrl,
+      size: backdropSize,
+    );
+
+    return movie.copyWith(
+      cardImagePath: cardImagePath,
+      bannerImagePath: bannerImagePath,
     );
   }
 
   static String? _buildImageUrl({
     required String? basePath,
     required String? baseUrl,
+    // TODO(JOAO): usar a lista consumida da home
     required String size,
   }) {
     if (basePath == null || basePath.isEmpty || baseUrl == null) {

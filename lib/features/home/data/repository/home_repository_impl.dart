@@ -16,6 +16,7 @@ class HomeRepositoryImpl implements HomeRepository {
     try {
       final HomeConfigImageModel response = await _remoteDatasource
           .configImages();
+
       return CoreBaseResponse<HomeConfigImageEntity>(
         data: HomeConfigImageEntity.fromModel(response.images),
       );

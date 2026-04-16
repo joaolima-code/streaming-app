@@ -37,23 +37,41 @@ class MovieDetailResponseModel {
   int id;
   String title;
   String overview;
-  String originalTitle;
-  String backdropPath;
   bool? adult;
   int? budget;
   List<HomeCategoryModel>? genres;
   String? homepage;
-  String? imdbId;
-  List<String>? originCountry;
-  String? originalLanguage;
   double? popularity;
-  String? posterPath;
-  String? releaseDate;
   int? revenue;
   int? runtime;
   String? status;
   String? tagline;
   bool? video;
+
+  @JsonKey(name: 'original_title')
+  String originalTitle;
+
+  @JsonKey(name: 'backdrop_path')
+  String backdropPath;
+
+  @JsonKey(name: 'imdb_id')
+  String? imdbId;
+
+  @JsonKey(name: 'origin_country')
+  List<String>? originCountry;
+
+  @JsonKey(name: 'original_language')
+  String? originalLanguage;
+
+  @JsonKey(name: 'poster_path')
+  String? posterPath;
+
+  @JsonKey(name: 'vote_average')
   double? voteAverage;
+
+  @JsonKey(name: 'release_date')
+  String? releaseDate;
+
+  @JsonKey(name: 'vote_count')
   int? voteCount;
 }
