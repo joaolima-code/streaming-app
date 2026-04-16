@@ -11,28 +11,28 @@ MovieDetailResponseModel _$MovieDetailResponseModelFromJson(
 ) => MovieDetailResponseModel(
   id: (json['id'] as num).toInt(),
   title: json['title'] as String,
-  originalTitle: json['originalTitle'] as String,
+  originalTitle: json['original_title'] as String,
   overview: json['overview'] as String,
-  backdropPath: json['backdropPath'] as String,
+  backdropPath: json['backdrop_path'] as String,
   adult: json['adult'] as bool?,
   budget: (json['budget'] as num?)?.toInt(),
   genres: (json['genres'] as List<dynamic>?)
       ?.map((e) => HomeCategoryModel.fromJson(e as Map<String, dynamic>))
       .toList(),
   homepage: json['homepage'] as String?,
-  imdbId: json['imdbId'] as String?,
-  originCountry: (json['originCountry'] as List<dynamic>?)
+  imdbId: json['imdb_id'] as String?,
+  originCountry: (json['origin_country'] as List<dynamic>?)
       ?.map((e) => e as String)
       .toList(),
-  originalLanguage: json['originalLanguage'] as String?,
+  originalLanguage: json['original_language'] as String?,
   popularity: (json['popularity'] as num?)?.toDouble(),
-  posterPath: json['posterPath'] as String?,
-  releaseDate: json['releaseDate'] as String?,
+  posterPath: json['poster_path'] as String?,
+  releaseDate: json['release_date'] as String?,
   revenue: (json['revenue'] as num?)?.toInt(),
   runtime: (json['runtime'] as num?)?.toInt(),
   status: json['status'] as String?,
   tagline: json['tagline'] as String?,
   video: json['video'] as bool?,
-  voteAverage: (json['voteAverage'] as num?)?.toDouble(),
-  voteCount: (json['voteCount'] as num?)?.toInt(),
+  voteAverage: (json['vote_average'] as num?)?.toDouble(),
+  voteCount: (json['vote_count'] as num?)?.toInt(),
 );

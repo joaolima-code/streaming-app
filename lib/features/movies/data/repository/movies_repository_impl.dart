@@ -18,7 +18,7 @@ class MoviesRepositoryImpl implements MoviesRepository {
   ) async {
     try {
       final MovieDetailResponseModel response = await _datasource
-          .getMovieDetails(movieId, 'en-US');
+          .getMovieDetails(movieId, 'pt-BR');
       return CoreBaseResponse<MovieDetailEntity>(
         data: MovieDetailEntity.fromModel(response),
       );

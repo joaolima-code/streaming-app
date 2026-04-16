@@ -23,6 +23,8 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
+    GetIt.instance<HomeConfigCubit>().init();
+
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1500),
@@ -47,20 +49,39 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Future<void> _checkConfigHomeNavigation() async {
-    await Future<void>.delayed(const Duration(seconds: 2));
+    final HomeConfigCubit homeConfigCubit = GetIt.instance<HomeConfigCubit>();
+
+    final Future<dynamic> delayedVisualSplash = Future<dynamic>.delayed(
+      const Duration(seconds: 2),
+    );
+
+    Future<void> waitForConfig;
+    if (homeConfigCubit.state is HomeConfigSuccess ||
+        homeConfigCubit.state is HomeConfigError) {
+      waitForConfig = Future<void>.value();
+    } else {
+      waitForConfig = homeConfigCubit.stream
+          .firstWhere(
+            (HomeConfigState state) =>
+                state is HomeConfigSuccess || state is HomeConfigError,
+          )
+          .timeout(
+            const Duration(seconds: 5),
+            onTimeout: () => const HomeConfigError('Timeout'),
+          );
+    }
+
+    await Future.wait(<Future<void>>[delayedVisualSplash, waitForConfig]);
+
     if (!mounted) {
       return;
     }
 
-    final HomeConfigCubit homeConfigCubit = GetIt.instance<HomeConfigCubit>();
-
     if (homeConfigCubit.state is HomeConfigSuccess) {
       context.go('/movies');
-    } else if (homeConfigCubit.state is HomeConfigError) {
-      // TODO(JOAO): criar essa tela de erro
-      context.go('/error');
+    } else if (homeConfigCubit.state is HomeConfigInitial) {
     } else {
-      context.go('/movies');
+      context.go('/error');
     }
   }
 

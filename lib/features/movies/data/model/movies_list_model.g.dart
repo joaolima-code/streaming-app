@@ -19,8 +19,8 @@ MoviesListModel _$MoviesListModelFromJson(Map<String, dynamic> json) =>
               )
               .toList() ??
           const <MovieResponseModel>[],
-      totalPages: (json['totalPages'] as num?)?.toInt(),
-      totalResults: (json['totalResults'] as num?)?.toInt(),
+      totalPages: (json['total_pages'] as num?)?.toInt(),
+      totalResults: (json['total_results'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$MoviesListModelToJson(MoviesListModel instance) =>
@@ -28,8 +28,8 @@ Map<String, dynamic> _$MoviesListModelToJson(MoviesListModel instance) =>
       'dates': instance.dates,
       'page': instance.page,
       'results': instance.results,
-      'totalPages': instance.totalPages,
-      'totalResults': instance.totalResults,
+      'total_pages': instance.totalPages,
+      'total_results': instance.totalResults,
     };
 
 Dates _$DatesFromJson(Map<String, dynamic> json) => Dates(

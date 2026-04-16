@@ -6,7 +6,10 @@ import 'data/repository/home_repository_impl.dart';
 import 'domain/repository/home_repository.dart';
 import 'domain/usecase/get_config_images_usecase.dart';
 import 'domain/usecase/get_list_movie_category_usecase.dart';
+import 'presentation/cubit/home_central_cubit.dart';
 import 'presentation/cubit/home_config_cubit.dart';
+import 'presentation/cubit/now_playing_carousel_cubit.dart';
+import 'presentation/cubit/popular_carousel_cubit.dart';
 
 class HomeInjection implements InjectionModule {
   HomeInjection._internal();
@@ -33,6 +36,14 @@ class HomeInjection implements InjectionModule {
       HomeConfigCubit(
         getConfigImagesUsecase: injector(),
         getListMovieCategoryUsecase: injector(),
+      ),
+    );
+    injector.registerLazySingleton(() => NowPlayingCarouselCubit(injector()));
+    injector.registerLazySingleton(() => PopularCarouselCubit(injector()));
+    injector.registerLazySingleton(
+      () => HomeCentralCubit(
+        nowPlayingCarouselCubit: injector(),
+        popularCarouselCubit: injector(),
       ),
     );
   }

@@ -3,7 +3,7 @@ import '../../../../core/interface/core_usecase_interface.dart';
 import '../../../../core/network/core_base_reponse.dart';
 import '../../../home/domain/entity/home_category_entity.dart';
 import '../../../home/domain/entity/home_config_image_entity.dart';
-import '../../data/model/movie_response_model.dart';
+import '../../../home/presentation/cubit/home_config_cubit.dart';
 import '../entity/movie_entity.dart';
 import '../entity/movies_list_entity.dart';
 import '../entity/movies_list_filter.dart';
@@ -11,20 +11,18 @@ import '../repository/movies_repository.dart';
 
 class GetMoviesNowPlayingUsecase
     implements RemoteQueryUsecaseInterface<MoviesListEntity, MoviesListFilter> {
-  GetMoviesNowPlayingUsecase(
-    this._repository, {
-    this.imageConfig,
-    this.categories = const <HomeCategoryEntity>[],
-  });
+  GetMoviesNowPlayingUsecase(this._repository, {required this.homeConfigCubit});
 
   final MoviesRepository _repository;
-  final HomeConfigImageEntity? imageConfig;
-  final List<HomeCategoryEntity> categories;
+  final HomeConfigCubit homeConfigCubit;
 
   @override
   Future<CoreBaseResponse<MoviesListEntity>> call(
     MoviesListFilter filter,
   ) async {
+    final HomeConfigImageEntity? imageConfig = homeConfigCubit.imageConfig;
+    final List<HomeCategoryEntity> categories = homeConfigCubit.categories;
+
     try {
       final CoreBaseResponse<MoviesListEntity> response = await _repository
           .getMoviesNowPlaying(filter);
@@ -36,27 +34,9 @@ class GetMoviesNowPlayingUsecase
       final MoviesListEntity moviesList = response.data!;
 
       if (imageConfig != null && moviesList.results.isNotEmpty) {
-        final List<MovieResponseModel> movieResponseModels = moviesList.results
-            .map(
-              (MovieEntity movie) => MovieResponseModel(
-                id: movie.id,
-                title: movie.title ?? '',
-                originalTitle: movie.title ?? '',
-                overview: movie.description ?? '',
-                posterPath: movie.cardImagePath,
-                backdropPath: movie.bannerImagePath,
-                genreIds: movie.genreIds.isNotEmpty ? movie.genreIds : null,
-                popularity: movie.popularity,
-                releaseDate: movie.releaseDate,
-                voteAverage: movie.voteAverage,
-                voteCount: movie.voteCount,
-              ),
-            )
-            .toList();
-
         final List<MovieEntity> enrichedMovies =
             MovieConfigHelper.addConfigEntities(
-              movies: movieResponseModels,
+              movies: moviesList.results,
               imageConfig: imageConfig!,
               categories: categories,
             );
