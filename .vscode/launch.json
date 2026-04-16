@@ -7,18 +7,30 @@
       "request": "launch",
       "type": "dart",
       "flutterMode": "debug",
+      "args": [
+        "--dart-define",
+        "API_KEY=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ZDZhZjYxNWQ2N2NmODMzMWQ4NTJmMmM0ZDhhOGM2NSIsIm5iZiI6MTc3NjEwMzgzNy4zMzIsInN1YiI6IjY5ZGQzMTlkZTAyOWFlOTZjZDliOGVkMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7zo97U-pcuvtSStFVKR0JEvbsCsp-OJ8ePXzXfLtPm4"
+      ]
     },
     {
       "name": "Streaming App (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile",
+      "args": [
+        "--dart-define",
+        "API_KEY=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ZDZhZjYxNWQ2N2NmODMzMWQ4NTJmMmM0ZDhhOGM2NSIsIm5iZiI6MTc3NjEwMzgzNy4zMzIsInN1YiI6IjY5ZGQzMTlkZTAyOWFlOTZjZDliOGVkMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7zo97U-pcuvtSStFVKR0JEvbsCsp-OJ8ePXzXfLtPm4"
+      ]
     },
     {
       "name": "Streaming App (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release",
+      "args": [
+        "--dart-define",
+        "API_KEY=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ZDZhZjYxNWQ2N2NmODMzMWQ4NTJmMmM0ZDhhOGM2NSIsIm5iZiI6MTc3NjEwMzgzNy4zMzIsInN1YiI6IjY5ZGQzMTlkZTAyOWFlOTZjZDliOGVkMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7zo97U-pcuvtSStFVKR0JEvbsCsp-OJ8ePXzXfLtPm4"
+      ]
     }
   ]
 }
