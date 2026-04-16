@@ -11,9 +11,9 @@ class HomeCentralCubit extends Cubit<HomeCentralState> {
   HomeCentralCubit({
     required NowPlayingCarouselCubit nowPlayingCarouselCubit,
     required PopularCarouselCubit popularCarouselCubit,
-  }) : _nowPlayingCarouselCubit = nowPlayingCarouselCubit,
-       _popularCarouselCubit = popularCarouselCubit,
-       super(HomeCentralInitial());
+  })  : _nowPlayingCarouselCubit = nowPlayingCarouselCubit,
+        _popularCarouselCubit = popularCarouselCubit,
+        super(HomeCentralInitial());
 
   final NowPlayingCarouselCubit _nowPlayingCarouselCubit;
   final PopularCarouselCubit _popularCarouselCubit;
@@ -87,17 +87,26 @@ class HomeCentralCubit extends Cubit<HomeCentralState> {
   }
 
   void _calculateHypeMovies(List<MovieEntity> movies) {
-    if (movies.isEmpty || _hypeMovies.isNotEmpty) {
+    if (movies.isEmpty) {
       return;
     }
 
     final List<MovieEntity> uniqueMovies = movies.toSet().toList();
-    uniqueMovies.sort(
-      (MovieEntity a, MovieEntity b) => b.voteAverage.compareTo(a.voteAverage),
-    );
+
+    final List<MovieEntity> hypePool = uniqueMovies
+        .where((MovieEntity movie) => movie.voteAverage >= 7.0)
+        .toList();
+
+    final List<MovieEntity> selectionSource = hypePool.length >= 3
+        ? hypePool
+        : (uniqueMovies
+          ..sort((MovieEntity first, MovieEntity second) =>
+              second.voteAverage.compareTo(first.voteAverage)));
+
+    selectionSource.shuffle();
 
     _hypeMovies.clear();
-    _hypeMovies.addAll(uniqueMovies.take(3));
+    _hypeMovies.addAll(selectionSource.take(3));
   }
 
   Future<void> loadMoreNowPlaying() async {
