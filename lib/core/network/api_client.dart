@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ApiClient {
   ApiClient() {
@@ -16,23 +15,22 @@ class ApiClient {
           }),
     );
 
-    if (!kReleaseMode) {
-      dio.interceptors.add(InterceptorsWrapper(onRequest: (
-        RequestOptions options,
-        RequestInterceptorHandler handler,
-      ) async {
-        final String? token = dotenv.env['API_TOKEN'];
-        options.headers['Authorization'] = 'Bearer $token';
+    dio.interceptors.add(InterceptorsWrapper(onRequest: (
+      RequestOptions options,
+      RequestInterceptorHandler handler,
+    ) async {
+      options.headers['Authorization'] = 'Bearer $apiKey';
 
-        return handler.next(options);
-      }, onError: (DioException error, ErrorInterceptorHandler handler) {
-        debugPrint('Dio Error: ${error.message}');
-        return handler.next(error);
-      }));
-    }
+      return handler.next(options);
+    }, onError: (DioException error, ErrorInterceptorHandler handler) {
+      debugPrint('Dio Error: ${error.message}');
+      return handler.next(error);
+    }));
   }
 
   static const String baseUrl = 'https://api.themoviedb.org/3';
+
+  static const String apiKey = String.fromEnvironment('API_KEY');
 
   late final Dio dio;
 }

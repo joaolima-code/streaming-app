@@ -14,9 +14,9 @@ O design foi concebido com foco na **objetividade**. Em aplicativos de streaming
 - **Carrosséis Horizontais:** Implementados com `ListView.builder`, listando os filmes "Em Cartaz" e "Populares" de forma performática.
 - **Detalhes Interativos:** Na tela de detalhes, a imagem de fundo possui um efeito interativo que reage ao scroll do usuário, utilizando um `CustomScrollView`.
 
-|                             Home (Destaques)                             |                              Home (Listas)                               |                             Detalhes (Topo)                              |                             Detalhes (Info)                              |
-| :----------------------------------------------------------------------: | :----------------------------------------------------------------------: | :----------------------------------------------------------------------: | :----------------------------------------------------------------------: |
-| <img src="lib/assets/screenshots/Screenshot_1776363042.png" width="180"> | <img src="lib/assets/screenshots/Screenshot_1776363050.png" width="180"> | <img src="lib/assets/screenshots/Screenshot_1776363059.png" width="180"> | <img src="lib/assets/screenshots/Screenshot_1776363064.png" width="180"> |
+|                           Home (Destaques)                           |                            Home (Listas)                             |                           Detalhes (Topo)                            |                           Detalhes (Info)                            |
+| :------------------------------------------------------------------: | :------------------------------------------------------------------: | :------------------------------------------------------------------: | :------------------------------------------------------------------: |
+| <img src="assets/screenshots/Screenshot_1776363042.png" width="180"> | <img src="assets/screenshots/Screenshot_1776363050.png" width="180"> | <img src="assets/screenshots/Screenshot_1776363059.png" width="180"> | <img src="assets/screenshots/Screenshot_1776363064.png" width="180"> |
 
 ---
 
@@ -66,19 +66,7 @@ Flutter instalado (versão >= 3.2.0).
 
 Um dispositivo Android ou Emulador configurado.
 
-### 1. Configuração da API
-
-Este projeto utiliza a API do TMDB. Para rodar:
-
-Crie um arquivo chamado .env na raiz do projeto.
-
-Adicione sua chave da API no seguinte formato:
-
-```text
-API_KEY=SUA_CHAVE_AQUI
-```
-
-### 2. Rodar o App (Android)
+### 1. Rodar o App (Android)
 
 No terminal, execute os seguintes comandos:
 
@@ -90,7 +78,9 @@ flutter pub get
 flutter pub run build_runner build --delete-conflicting-outputs
 
 # Executar o projeto
-flutter run
+# Este projeto utiliza a API do TMDB.
+# Adicione sua chave da API no seguinte formato:
+flutter run --dart-define=API_KEY=SUA_CHAVE_AQUI
 ```
 
 ## 🧪 Testes e Cobertura
