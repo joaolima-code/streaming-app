@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/home/presentation/screen/home_screen.dart';
 import '../../features/home/presentation/screen/splash_screen.dart';
 import '../../features/movies/presentation/screens/movie_detail_screen.dart';
+import '../widgets/widgets.dart';
 
 class AppRouter {
   AppRouter._();
@@ -31,8 +32,7 @@ class AppRouter {
       GoRoute(
           path: '/error',
           builder: (BuildContext context, GoRouterState state) {
-            return const Scaffold(
-                body: Center(child: Text('An error occurred')));
+            return const Scaffold(body: CoreErrorWidget());
           })
     ],
   );

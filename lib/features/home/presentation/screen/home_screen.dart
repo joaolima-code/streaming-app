@@ -65,7 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildMainContent(BuildContext context, HomeCentralSuccess state) {
     return Column(
       children: <Widget>[
-        // Criar logica para esse mainCarousel
         if (state.hypeMovies.isNotEmpty) ...<Widget>[
           _buildMainCarousel(context, state),
           const SizedBox(height: 24),
