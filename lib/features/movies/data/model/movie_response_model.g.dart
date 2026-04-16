@@ -10,36 +10,36 @@ MovieResponseModel _$MovieResponseModelFromJson(Map<String, dynamic> json) =>
     MovieResponseModel(
       id: (json['id'] as num).toInt(),
       title: json['title'] as String,
-      originalTitle: json['originalTitle'] as String,
       overview: json['overview'] as String,
+      originalTitle: json['original_title'] as String?,
       adult: json['adult'] as bool?,
-      backdropPath: json['backdropPath'] as String?,
-      genreIds: (json['genreIds'] as List<dynamic>?)
+      backdropPath: json['backdrop_path'] as String?,
+      genreIds: (json['genre_ids'] as List<dynamic>?)
           ?.map((e) => (e as num).toInt())
           .toList(),
-      originalLanguage: json['originalLanguage'] as String?,
+      originalLanguage: json['original_language'] as String?,
       popularity: (json['popularity'] as num?)?.toDouble(),
-      posterPath: json['posterPath'] as String?,
-      releaseDate: json['releaseDate'] as String?,
+      posterPath: json['poster_path'] as String?,
+      releaseDate: json['release_date'] as String?,
       video: json['video'] as bool?,
-      voteAverage: (json['voteAverage'] as num?)?.toDouble(),
-      voteCount: (json['voteCount'] as num?)?.toInt(),
+      voteAverage: (json['vote_average'] as num?)?.toDouble(),
+      voteCount: (json['vote_count'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$MovieResponseModelToJson(MovieResponseModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'adult': instance.adult,
-      'backdropPath': instance.backdropPath,
-      'genreIds': instance.genreIds,
-      'originalLanguage': instance.originalLanguage,
-      'originalTitle': instance.originalTitle,
       'overview': instance.overview,
       'popularity': instance.popularity,
-      'posterPath': instance.posterPath,
-      'releaseDate': instance.releaseDate,
       'title': instance.title,
       'video': instance.video,
-      'voteAverage': instance.voteAverage,
-      'voteCount': instance.voteCount,
+      'backdrop_path': instance.backdropPath,
+      'genre_ids': instance.genreIds,
+      'original_language': instance.originalLanguage,
+      'original_title': instance.originalTitle,
+      'poster_path': instance.posterPath,
+      'release_date': instance.releaseDate,
+      'vote_average': instance.voteAverage,
+      'vote_count': instance.voteCount,
     };

@@ -20,7 +20,11 @@ class MoviesListModel {
   Dates? dates;
   int? page;
   List<MovieResponseModel> results;
+
+  @JsonKey(name: 'total_pages')
   int? totalPages;
+
+  @JsonKey(name: 'total_results')
   int? totalResults;
 }
 

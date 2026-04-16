@@ -47,9 +47,11 @@ class _HomeRemoteDatasource implements HomeRemoteDatasource {
   }
 
   @override
-  Future<HomeListCategoriesModel> listCategories() async {
+  Future<HomeListCategoriesModel> listCategories({
+    String language = 'pt-BR',
+  }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'language': language};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<HomeListCategoriesModel>(

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../../core/helper/date_helper.dart';
 import '../../../home/domain/entity/home_category_entity.dart';
 import '../../data/model/movie_response_model.dart';
 
@@ -14,7 +15,7 @@ class MovieEntity extends Equatable {
     this.categories = const <HomeCategoryEntity>[],
     this.popularity,
     this.releaseDate,
-    this.voteAverage,
+    this.voteAverage = 0.0,
     this.voteCount,
   });
 
@@ -26,8 +27,8 @@ class MovieEntity extends Equatable {
     description: model.overview,
     genreIds: model.genreIds ?? <int>[],
     popularity: model.popularity,
-    releaseDate: model.releaseDate,
-    voteAverage: model.voteAverage,
+    releaseDate: model.releaseDate.toMonthYear(),
+    voteAverage: model.voteAverage ?? 0.0,
     voteCount: model.voteCount,
   );
 
@@ -40,7 +41,7 @@ class MovieEntity extends Equatable {
   final String? description;
   final double? popularity;
   final String? releaseDate;
-  final double? voteAverage;
+  final double voteAverage;
   final int? voteCount;
 
   MovieEntity copyWith({

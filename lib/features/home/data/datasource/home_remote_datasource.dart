@@ -15,5 +15,7 @@ abstract class HomeRemoteDatasource {
   Future<HomeConfigImageModel> configImages();
 
   @GET('/genre/movie/list')
-  Future<HomeListCategoriesModel> listCategories();
+  Future<HomeListCategoriesModel> listCategories({
+    @Query('language') String language = 'pt-BR',
+  });
 }
