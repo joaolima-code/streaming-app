@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
         // Criar logica para esse mainCarousel
         if (state.hypeMovies.isNotEmpty) ...<Widget>[
           _buildMainCarousel(context, state),
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
         ],
         _buildCarouselSection(
           context,

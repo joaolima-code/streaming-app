@@ -19,6 +19,7 @@ dependencies:
   cached_network_image: ^3.4.1
   json_annotation: ^4.11.0
   equatable: ^2.0.5
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
@@ -28,9 +29,15 @@ dev_dependencies:
   json_serializable: ^6.13.1
   build_runner: ^2.13.1
   retrofit_generator: ^10.2.5
+  mockito: ^5.4.4
 
 flutter:
   uses-material-design: true
 
   assets:
     - .env
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "lib/assets/icon/icon_launcher.png"
