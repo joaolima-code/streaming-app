@@ -99,34 +99,28 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                       onPressed: () => Navigator.pop(context)),
                 ),
                 flexibleSpace: FlexibleSpaceBar(
-                    title: _appBarOpacity > 0.8
-                        ? Text(
-                            state.movie.title,
-                            style: AppTypography.titleLarge,
-                          )
-                        : null,
                     background: Stack(children: <Widget>[
-                      Transform.scale(
-                          scale: 1 +
-                              (_scrollController.hasClients
-                                  ? _scrollController.offset / 1000
-                                  : 0.0),
-                          child: CachedImageWidget(
-                              imageUrl: state.movie.bannerImagePath,
-                              width: double.infinity,
-                              height: double.infinity,
-                              borderRadius: 0)),
-                      Container(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                  begin: Alignment.center,
-                                  end: Alignment.bottomCenter,
-                                  colors: <Color>[
-                            Colors.black.withValues(alpha: 0.3),
-                            Colors.black.withValues(alpha: 0.6),
-                            AppColors.background
-                          ])))
-                    ])),
+                  Transform.scale(
+                      scale: 1 +
+                          (_scrollController.hasClients
+                              ? _scrollController.offset / 1000
+                              : 0.0),
+                      child: CachedImageWidget(
+                          imageUrl: state.movie.bannerImagePath,
+                          width: double.infinity,
+                          height: double.infinity,
+                          borderRadius: 0)),
+                  Container(
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.center,
+                              end: Alignment.bottomCenter,
+                              colors: <Color>[
+                        Colors.black.withValues(alpha: 0.3),
+                        Colors.black.withValues(alpha: 0.6),
+                        AppColors.background
+                      ])))
+                ])),
               ),
               SliverToBoxAdapter(
                   child: _buildDetailContent(context, state.movie))

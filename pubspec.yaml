@@ -19,6 +19,7 @@ dependencies:
   cached_network_image: ^3.4.1
   json_annotation: ^4.11.0
   equatable: ^2.0.5
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
@@ -35,3 +36,8 @@ flutter:
 
   assets:
     - .env
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "lib/assets/icon/icon_launcher.png"
